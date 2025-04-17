@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: title">
-  <title>Inicio</title>
-</head>
+<head><title>Inicio</title></head>
 <body>
   <div th:replace="fragments :: header"></div>
   <div th:replace="fragments :: nav"></div>
 
-  <div class="container text-center">
-    <h2>Bienvenidos al Cine Fidélitas</h2>
-    <div class="ratio ratio-16x9 my-4">
-      <iframe th:src="@{https://www.youtube.com/embed/dQw4w9WgXcQ}" 
-              title="Tráiler" allowfullscreen></iframe>
+  <div class="container">
+    <h2 class="mb-4">Bienvenidos al Cine Fidélitas</h2>
+    <div class="ratio ratio-16x9">
+      <iframe th:src="@{https://www.youtube.com/embed/dQw4w9WgXcQ}" allowfullscreen></iframe>
     </div>
   </div>
 
   <div th:replace="fragments :: footer"></div>
-  <div th:replace="fragments :: scripts"></div>
+  <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: title">
-  <title>Formulario Función</title>
-</head>
+<head><title>Función</title></head>
 <body>
-  <div th:replace="fragments :: header"></div>
-  <div th:replace="fragments :: nav"></div>
+<div th:replace="fragments :: header"></div>
+<div th:replace="fragments :: nav"></div>
 
-  <div class="container" style="max-width:600px;">
-    <h2 th:text="${funcion.id} != null ? 'Editar Función' : 'Nueva Función'"></h2>
-    <form th:action="@{/funciones/guardar}" th:object="${funcion}" method="post">
-      <input type="hidden" th:field="*{id}"/>
-      <div class="mb-3">
-        <label class="form-label">Película</label>
-        <select th:field="*{pelicula.id}" class="form-select" required>
-          <option th:each="p: ${peliculas}" th:value="${p.id}"
-                  th:text="${p.titulo}"></option>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Fecha y Hora</label>
-        <input type="datetime-local" th:field="*{fechaHora}" class="form-control" required/>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Sala</label>
-        <input type="text" th:field="*{sala}" class="form-control" required/>
-      </div>
-      <button type="submit" class="btn btn-primary">Guardar</button>
+<div class="container" style="max-width:600px;">
+  <h2 th:text="${funcion.id}!=null?'Editar Función':'Nueva Función'"></h2>
+  <form th:action="@{/funciones/guardar}" th:object="${funcion}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+
+    <div class="mb-3">
+      <label class="form-label">Película</label>
+      <select th:field="*{pelicula}" class="form-select" required>
+        <option th:each="p:${peliculas}" th:value="${p}" th:text="${p.titulo}"></option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Fecha / Hora</label>
+      <input type="datetime-local" th:field="*{fechaHora}" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Sala</label>
+      <input th:field="*{sala}" class="form-control" required>
+    </div>
+
+    <div class="d-flex gap-2">
+      <button class="btn btn-primary">Guardar</button>
       <a th:href="@{/funciones}" class="btn btn-secondary">Cancelar</a>
-    </form>
-  </div>
+    </div>
+  </form>
+</div>
 
-  <div th:replace="fragments :: footer"></div>
-  <div th:replace="fragments :: scripts"></div>
+<div th:replace="fragments :: footer"></div>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
