@@ -1,13 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.domain;
 
-/**
- *
- * @author chara
- */
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity 
+@Table(name = "reservas")
+@Data @NoArgsConstructor @AllArgsConstructor
 public class Reserva {
-    
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String usuario;
+    private int cantidadEntradas;
+
+    @ManyToOne
+    @JoinColumn(name = "funcion_id")
+    private Funcion funcion;
 }

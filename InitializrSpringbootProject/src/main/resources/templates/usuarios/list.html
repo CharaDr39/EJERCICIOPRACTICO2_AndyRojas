@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: title">
+  <title>Usuarios</title>
+</head>
+<body>
+  <div th:replace="fragments :: header"></div>
+  <div th:replace="fragments :: nav"></div>
+
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>Gestión de Usuarios</h2>
+      <a th:href="@{/usuarios/nuevo}" class="btn btn-success">
+        Nuevo Usuario
+      </a>
+    </div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th><th>Username</th><th>Enabled</th><th>Roles</th><th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="u: ${usuarios}">
+          <td th:text="${u.id}"></td>
+          <td th:text="${u.username}"></td>
+          <td th:text="${u.enabled}"></td>
+          <td th:text="${u.roles.stream().map(r->r.name).toList()}"></td>
+          <td>
+            <a th:href="@{|/usuarios/eliminar/${u.id}|}" class="btn btn-danger btn-sm">
+              Eliminar
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div th:replace="fragments :: footer"></div>
+  <div th:replace="fragments :: scripts"></div>
+</body>
+</html>

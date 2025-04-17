@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: title">
+  <title>Funciones</title>
+</head>
+<body>
+  <div th:replace="fragments :: header"></div>
+  <div th:replace="fragments :: nav"></div>
+
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>Funciones</h2>
+      <a th:href="@{/funciones/nueva}" class="btn btn-success" sec:authorize="hasRole('ROLE_ADMIN')">
+        Nueva Función
+      </a>
+    </div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th><th>Película</th><th>Fecha/Hora</th><th>Sala</th><th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="f: ${funciones}">
+          <td th:text="${f.id}"></td>
+          <td th:text="${f.pelicula.titulo}"></td>
+          <td th:text="${#dates.format(f.fechaHora,'dd/MM/yyyy HH:mm')}"></td>
+          <td th:text="${f.sala}"></td>
+          <td>
+            <a th:href="@{|/funciones/eliminar/${f.id}|}" class="btn btn-danger btn-sm"
+               sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div th:replace="fragments :: footer"></div>
+  <div th:replace="fragments :: scripts"></div>
+</body>
+</html>

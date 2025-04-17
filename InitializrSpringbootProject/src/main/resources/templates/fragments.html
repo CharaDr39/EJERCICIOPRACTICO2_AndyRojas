@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title th:fragment="title">Cinema App</title>
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+
+  <header th:fragment="header" class="bg-dark text-white p-3 mb-4">
+    <div class="container">
+      <h1>Fidélitas Cine</h1>
+    </div>
+  </header>
+
+  <nav th:fragment="nav" class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    <div class="container">
+      <a class="navbar-brand" th:href="@{/}">Inicio</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item"><a class="nav-link" th:href="@{/peliculas}">Cartelera</a></li>
+          <li class="nav-item"><a class="nav-link" th:href="@{/funciones}">Funciones</a></li>
+          <li class="nav-item"><a class="nav-link" th:href="@{/reservas}">Reservas</a></li>
+          <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+            <a class="nav-link" th:href="@{/usuarios}">Gestión Usuarios</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item" sec:authorize="isAuthenticated()">
+            <a class="nav-link" th:href="@{/logout}">Salir</a>
+          </li>
+          <li class="nav-item" sec:authorize="!isAuthenticated()">
+            <a class="nav-link" th:href="@{/login}">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <footer th:fragment="footer" class="bg-light text-center py-3 mt-4">
+    <div class="container">
+      <small>&copy; 2025 Universidad Fidélitas</small>
+    </div>
+  </footer>
+
+  <script th:fragment="scripts" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
