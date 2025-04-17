@@ -1,8 +1,9 @@
 package com.service;
 
-import java.util.List;
 import com.domain.Role;
+import java.util.List;
 
 public interface RoleService {
-    List<Role> listarTodos();
+    List<Role> listarTodas();
+    Role buscarPorId(Long id);
 }

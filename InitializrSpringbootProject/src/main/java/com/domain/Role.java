@@ -8,5 +8,5 @@ import lombok.*;
 public class Role {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name; // p.ej. "ROLE_ADMIN", "ROLE_USER"
+    private String name; // "ROLE_ADMIN" "ROLE_USER"
 }

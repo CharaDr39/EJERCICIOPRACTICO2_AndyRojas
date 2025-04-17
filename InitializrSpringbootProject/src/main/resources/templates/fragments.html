@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<!-- ========= HEAD (recibe un título) ========= -->
 <head th:fragment="head(titulo)">
   <meta charset="UTF-8">
   <title th:text="${titulo}">Cine App</title>
@@ -12,14 +11,12 @@
 
 <body>
 
-<!-- ========= HEADER ========= -->
 <th:block th:fragment="header">
   <header class="py-3 mb-4 text-white">
     <div class="container"><h1 class="h3 m-0">Fidélitas Cine</h1></div>
   </header>
 </th:block>
 
-<!-- ========= NAVBAR ========= -->
 <th:block th:fragment="nav">
   <nav class="navbar navbar-expand-lg mb-4">
     <div class="container">
@@ -46,12 +43,10 @@
   </nav>
 </th:block>
 
-<!-- ========= FOOTER ========= -->
 <th:block th:fragment="footer">
   <footer class="text-center py-3 mt-4">© 2025 Universidad Fidélitas</footer>
 </th:block>
 
-<!-- ========= SCRIPTS ========= -->
 <th:block th:fragment="scripts">
   <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </th:block>

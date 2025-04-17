@@ -1,22 +1,23 @@
 package com.controllers;
 
+import com.domain.Usuario;
+import com.service.UsuarioService;
+import com.service.RoleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.domain.Usuario;
-import com.service.UsuarioService;
-import com.service.RoleService;
-
-import lombok.RequiredArgsConstructor;
-
 @Controller
 @RequestMapping("/usuarios")
-@RequiredArgsConstructor
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
     private final RoleService roleService;
+
+    public UsuarioController(UsuarioService usuarioService, RoleService roleService) {
+        this.usuarioService = usuarioService;
+        this.roleService = roleService;
+    }
 
     @GetMapping
     public String listar(Model model) {
@@ -27,7 +28,7 @@ public class UsuarioController {
     @GetMapping("/nuevo")
     public String nuevo(Model model) {
         model.addAttribute("usuario", new Usuario());
-        model.addAttribute("rolesList", roleService.listarTodos());
+        model.addAttribute("rolesDisponibles", roleService.listarTodas());
         return "usuarios/form";
     }
 
@@ -40,7 +41,7 @@ public class UsuarioController {
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable Long id, Model model) {
         model.addAttribute("usuario", usuarioService.buscarPorId(id));
-        model.addAttribute("rolesList", roleService.listarTodos());
+        model.addAttribute("rolesDisponibles", roleService.listarTodas());
         return "usuarios/form";
     }
 

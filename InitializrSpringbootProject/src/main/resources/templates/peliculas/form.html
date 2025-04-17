@@ -14,12 +14,10 @@
           th:action="@{/peliculas/guardar}"
           method="post">
 
-      <!-- ID oculto si existe -->
       <input type="hidden"
              th:if="${pelicula.id}"
              th:field="*{id}" />
 
-      <!-- Título -->
       <div class="mb-3">
         <label class="form-label">Título</label>
         <input th:field="*{titulo}"
@@ -28,7 +26,6 @@
                required/>
       </div>
 
-      <!-- Duración -->
       <div class="mb-3">
         <label class="form-label">Duración (min)</label>
         <input th:field="*{duracion}"

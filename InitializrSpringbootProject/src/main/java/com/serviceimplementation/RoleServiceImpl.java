@@ -1,22 +1,28 @@
-// src/main/java/com/serviceimplementation/RoleServiceImpl.java
 package com.serviceimplementation;
-
-import java.util.List;
-
-import org.springframework.stereotype.Service;
 
 import com.domain.Role;
 import com.repository.RoleRepository;
 import com.service.RoleService;
+import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
+import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
-    private final RoleRepository repo;
+
+    private final RoleRepository repository;
+
+    public RoleServiceImpl(RoleRepository repository) {
+        this.repository = repository;
+    }
+
     @Override
-    public List<Role> listarTodos() {
-        return repo.findAll();
+    public List<Role> listarTodas() {
+        return repository.findAll();
+    }
+
+    @Override
+    public Role buscarPorId(Long id) {
+        return repository.findById(id).orElse(null);
     }
 }
