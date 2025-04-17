@@ -4,6 +4,7 @@ import com.serviceimplementation.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +21,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/css/**", "/js/**", "/img/**", "/", "/login", "/error").permitAll()
+                .requestMatchers(HttpMethod.GET, "/peliculas", "/funciones").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/reservas/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/peliculas/**", "/funciones/**", "/usuarios/**").hasRole("ADMIN")
                 .anyRequest().authenticated())

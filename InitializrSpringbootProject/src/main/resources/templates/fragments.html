@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
+
+<!-- ========= HEAD (recibe un título) ========= -->
+<head th:fragment="head(titulo)">
   <meta charset="UTF-8">
-  <title>Cinema App</title>
+  <title th:text="${titulo}">Cine App</title>
   <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
   <link th:href="@{/css/styles.css}"      rel="stylesheet"/>
 </head>
+
 <body>
 
-  <!-- HEADER -->
-  <header class="py-3 mb-4 text-white"><div class="container">
-    <h1 class="h3 m-0">Fidélitas Cine</h1></div>
+<!-- ========= HEADER ========= -->
+<th:block th:fragment="header">
+  <header class="py-3 mb-4 text-white">
+    <div class="container"><h1 class="h3 m-0">Fidélitas Cine</h1></div>
   </header>
+</th:block>
 
-  <!-- NAVBAR -->
+<!-- ========= NAVBAR ========= -->
+<th:block th:fragment="nav">
   <nav class="navbar navbar-expand-lg mb-4">
     <div class="container">
       <a class="navbar-brand" th:href="@{/}">Inicio</a>
@@ -38,10 +44,17 @@
       </div>
     </div>
   </nav>
+</th:block>
 
-  <!-- FOOTER -->
+<!-- ========= FOOTER ========= -->
+<th:block th:fragment="footer">
   <footer class="text-center py-3 mt-4">© 2025 Universidad Fidélitas</footer>
+</th:block>
 
+<!-- ========= SCRIPTS ========= -->
+<th:block th:fragment="scripts">
   <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</th:block>
+
 </body>
 </html>

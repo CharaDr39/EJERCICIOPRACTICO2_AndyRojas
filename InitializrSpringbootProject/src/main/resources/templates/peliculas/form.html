@@ -1,28 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Película</title></head>
-<body>
-<div th:replace="fragments :: header"></div>
-<div th:replace="fragments :: nav"></div>
+<head th:replace="fragments :: head('Formulario Película')"></head>
+<body class="bg-dark text-white">
+  <div th:replace="fragments :: header"></div>
+  <div th:replace="fragments :: nav"></div>
 
-<div class="container" style="max-width:600px;">
-  <h2 th:text="${pelicula.id} != null ? 'Editar Película' : 'Nueva Película'"></h2>
-  <form th:action="@{/peliculas/guardar}" th:object="${pelicula}" method="post">
-    <input type="hidden" th:field="*{id}"/>
-    <div class="mb-3"><label class="form-label">Título</label>
-      <input th:field="*{titulo}" class="form-control" required></div>
-    <div class="mb-3"><label class="form-label">Descripción</label>
-      <textarea th:field="*{descripcion}" class="form-control" rows="3"></textarea></div>
-    <div class="mb-3"><label class="form-label">Duración (min)</label>
-      <input type="number" th:field="*{duracion}" class="form-control" required></div>
-    <div class="d-flex gap-2">
-      <button class="btn btn-primary">Guardar</button>
-      <a th:href="@{/peliculas}" class="btn btn-secondary">Cancelar</a>
-    </div>
-  </form>
-</div>
+  <div class="container w-50">
+    <h2 class="mb-4"
+        th:text="${pelicula.id} != null ? 'Editar Película' : 'Nueva Película'">
+      Nueva Película
+    </h2>
+    <form th:object="${pelicula}"
+          th:action="@{/peliculas/guardar}"
+          method="post">
 
-<div th:replace="fragments :: footer"></div>
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+      <!-- ID oculto si existe -->
+      <input type="hidden"
+             th:if="${pelicula.id}"
+             th:field="*{id}" />
+
+      <!-- Título -->
+      <div class="mb-3">
+        <label class="form-label">Título</label>
+        <input th:field="*{titulo}"
+               class="form-control"
+               placeholder="Ingrese el título"
+               required/>
+      </div>
+
+      <!-- Duración -->
+      <div class="mb-3">
+        <label class="form-label">Duración (min)</label>
+        <input th:field="*{duracion}"
+               type="number"
+               min="1"
+               class="form-control"
+               placeholder="Duración en minutos"
+               required/>
+      </div>
+
+      <button type="submit"
+              class="btn btn-primary">
+        Guardar
+      </button>
+    </form>
+  </div>
+
+  <div th:replace="fragments :: footer"></div>
+  <div th:replace="fragments :: scripts"></div>
 </body>
 </html>

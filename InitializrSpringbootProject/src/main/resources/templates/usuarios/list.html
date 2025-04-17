@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Usuarios</title></head>
-<body>
-<div th:replace="fragments :: header"></div>
-<div th:replace="fragments :: nav"></div>
+<head th:replace="fragments :: head('Usuarios')"></head>
 
-<div class="container">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>Usuarios</h2>
-    <a th:href="@{/usuarios/nuevo}" class="btn btn-success">Nuevo Usuario</a>
+<body class="bg-dark text-white">
+  <div th:replace="fragments :: header"></div>
+  <div th:replace="fragments :: nav"></div>
+
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>Usuarios</h2>
+      <a th:href="@{/usuarios/nuevo}" class="btn btn-success">Nuevo Usuario</a>
+    </div>
+
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr><th>ID</th><th>Usuario</th><th>Roles</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr th:each="u : ${usuarios}">
+          <td th:text="${u.id}"></td>
+          <td th:text="${u.username}"></td>
+          <td th:text="${u.roles}"></td>
+          <td>
+            <a th:href="@{|/usuarios/editar/${u.id}|}" class="btn btn-warning btn-sm">Editar</a>
+            <a th:href="@{|/usuarios/eliminar/${u.id}|}" class="btn btn-danger btn-sm">Eliminar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <table class="table table-striped">
-    <thead><tr><th>ID</th><th>Nombre</th><th>Rol</th><th></th></tr></thead>
-    <tbody>
-      <tr th:each="u : ${usuarios}">
-        <td th:text="${u.id}"/>
-        <td th:text="${u.username}"/>
-        <td th:text="${u.role}"/>
-        <td>
-          <a th:href="@{|/usuarios/eliminar/${u.id}|}" class="btn btn-danger btn-sm">Eliminar</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<div th:replace="fragments :: footer"></div>
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+  <div th:replace="fragments :: footer"></div>
+  <div th:replace="fragments :: scripts"></div>
 </body>
 </html>

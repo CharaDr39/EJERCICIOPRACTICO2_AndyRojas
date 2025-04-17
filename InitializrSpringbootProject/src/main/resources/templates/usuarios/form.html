@@ -1,41 +1,40 @@
+<!-- src/main/resources/templates/usuarios/form.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Usuario</title></head>
-<body>
-<div th:replace="fragments :: header"></div>
-<div th:replace="fragments :: nav"></div>
+<head th:replace="fragments :: head('Formulario Usuario')"></head>
+<body class="bg-dark text-white">
+  <div th:replace="fragments :: header"></div>
+  <div th:replace="fragments :: nav"></div>
 
-<div class="container" style="max-width:600px;">
-  <h2 th:text="${usuario.id}!=null?'Editar Usuario':'Nuevo Usuario'"></h2>
-  <form th:action="@{/usuarios/guardar}" th:object="${usuario}" method="post">
-    <input type="hidden" th:field="*{id}"/>
+  <div class="container w-50">
+    <h2 th:text="${usuario.id} == null ? 'Nuevo Usuario' : 'Editar Usuario'"></h2>
+    <form th:object="${usuario}" th:action="@{/usuarios/guardar}" method="post">
+      <input type="hidden" th:if="${usuario.id}" th:field="*{id}" />
 
-    <div class="mb-3">
-      <label class="form-label">Nombre de usuario</label>
-      <input th:field="*{username}" class="form-control" required>
-    </div>
+      <div class="mb-3">
+        <label class="form-label">Usuario</label>
+        <input th:field="*{username}" class="form-control" required />
+      </div>
 
-    <div class="mb-3">
-      <label class="form-label">Contraseña</label>
-      <input type="password" th:field="*{password}" class="form-control" required>
-    </div>
+      <div class="mb-3" th:if="${usuario.id} == null">
+        <label class="form-label">Contraseña</label>
+        <input th:field="*{password}" type="password" class="form-control" required />
+      </div>
 
-    <div class="mb-3">
-      <label class="form-label">Rol</label>
-      <select th:field="*{role}" class="form-select">
-        <option value="ROLE_USER">USER</option>
-        <option value="ROLE_ADMIN">ADMIN</option>
-      </select>
-    </div>
+      <div class="mb-3">
+        <label class="form-label">Roles</label>
+        <select th:field="*{roles}" multiple="multiple" class="form-select" size="5" required>
+          <option th:each="r : ${rolesList}"
+                  th:value="${r}"
+                  th:text="${r.nombre}">ROLE_USER</option>
+        </select>
+      </div>
 
-    <div class="d-flex gap-2">
-      <button class="btn btn-primary">Guardar</button>
-      <a th:href="@{/usuarios}" class="btn btn-secondary">Cancelar</a>
-    </div>
-  </form>
-</div>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+  </div>
 
-<div th:replace="fragments :: footer"></div>
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+  <div th:replace="fragments :: footer"></div>
+  <div th:replace="fragments :: scripts"></div>
 </body>
 </html>
